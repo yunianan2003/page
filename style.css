@@ -1,0 +1,372 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+:root {
+  --white: rgba(255, 255, 255, 0.96);
+  --white-soft: rgba(255, 255, 255, 0.82);
+  --line: rgba(255, 255, 255, 0.22);
+  --line-strong: rgba(255, 255, 255, 0.42);
+  --shadow: rgba(0, 0, 0, 0.24);
+}
+
+body {
+  overflow-x: hidden;
+  color: var(--white);
+  background: #000;
+  font-family: "Songti SC", "STSong", "SimSun", serif;
+}
+
+/* 通用背景 */
+.home-page,
+.sub-page {
+  position: relative;
+  min-height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* 首页背景 */
+.home-page {
+  background-image: url("index.gif");
+}
+
+/* 二级页背景 */
+.page-tiandi {
+  background-image: url("1-jingtiandi.jpg");
+}
+
+.page-kexue {
+  background-image: url("2-jiangkexue.jpg");
+}
+
+.page-zizai {
+  background-image: url("3-juezizai.jpg");
+}
+
+/* 遮罩层 */
+.home-overlay,
+.sub-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.home-overlay {
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.28)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.08));
+}
+
+.sub-overlay {
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.26)),
+    linear-gradient(to right, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.12));
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.28);
+}
+
+/* 导航 */
+.navbar {
+  position: absolute;
+  top: 28px;
+  right: 34px;
+  z-index: 10;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.navbar a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 92px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--white);
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    opacity 0.35s ease;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.navbar a:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--line-strong);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
+.navbar a.active {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.52);
+}
+
+/* 首页主体 */
+.hero {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 24px 140px;
+}
+
+.hero-inner {
+  text-align: center;
+  animation: fadeRise 1.6s ease both;
+}
+
+.seal-title {
+  font-family:
+    "FZShuTi",
+    "STKaiti",
+    "KaiTi",
+    "Songti SC",
+    serif;
+  font-size: clamp(60px, 10vw, 132px);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.98);
+  text-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.24),
+    0 0 28px rgba(255, 255, 255, 0.06);
+  line-height: 1.15;
+  animation: breathe 5.5s ease-in-out infinite;
+}
+
+/* 首页底部小字 */
+.home-footer {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  z-index: 4;
+  width: calc(100% - 40px);
+  text-align: center;
+  animation: fadeInSoft 2.2s ease both;
+}
+
+.home-footer p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(12px, 1.2vw, 15px);
+  letter-spacing: 0.18em;
+  font-family: "Songti SC", "STSong", "SimSun", serif;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 二级页主体 */
+.content-page {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 32px 72px;
+}
+
+.quote-panel {
+  width: min(920px, 90%);
+  padding: 38px 36px;
+  text-align: center;
+  animation: fadeRise 1.2s ease both;
+  position: relative;
+}
+
+.quote-panel::before,
+.quote-panel::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(520px, 68%);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.42),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.quote-panel::before {
+  top: 0;
+}
+
+.quote-panel::after {
+  bottom: 0;
+}
+
+.quote-panel p {
+  color: rgba(255, 255, 255, 0.97);
+  font-family:
+    "Songti SC",
+    "STSong",
+    "SimSun",
+    "KaiTi",
+    serif;
+  font-size: clamp(22px, 2.1vw, 31px);
+  line-height: 2.05;
+  letter-spacing: 0.04em;
+  text-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.28),
+    0 0 18px rgba(0, 0, 0, 0.06);
+}
+
+.quote-panel-short {
+  width: min(760px, 88%);
+}
+
+.quote-panel-short p {
+  font-size: clamp(26px, 2.4vw, 38px);
+  line-height: 2;
+  letter-spacing: 0.12em;
+}
+
+/* 动画 */
+@keyframes fadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSoft {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    text-shadow:
+      0 4px 14px rgba(0, 0, 0, 0.24),
+      0 0 28px rgba(255, 255, 255, 0.06);
+  }
+  50% {
+    transform: scale(1.015);
+    text-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.28),
+      0 0 36px rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+  .quote-panel p {
+    line-height: 1.95;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+  }
+
+  .navbar nav {
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  .navbar a {
+    min-width: auto;
+    padding: 8px 14px;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .hero {
+    padding: 76px 20px 120px;
+  }
+
+  .seal-title {
+    letter-spacing: 0.1em;
+    font-size: clamp(48px, 14vw, 88px);
+  }
+
+  .home-footer {
+    bottom: 18px;
+    width: calc(100% - 24px);
+  }
+
+  .home-footer p {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    line-height: 1.8;
+  }
+
+  .content-page {
+    padding: 110px 20px 56px;
+  }
+
+  .quote-panel {
+    width: 100%;
+    padding: 28px 8px;
+  }
+
+  .quote-panel::before,
+  .quote-panel::after {
+    width: 76%;
+  }
+
+  .quote-panel p {
+    font-size: 18px;
+    line-height: 1.95;
+    letter-spacing: 0.02em;
+  }
+
+  .quote-panel-short p {
+    font-size: 24px;
+    letter-spacing: 0.08em;
+  }
+
+  .vignette {
+    box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.24);
+  }
+}
